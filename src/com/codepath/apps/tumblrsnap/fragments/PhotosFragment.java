@@ -52,6 +52,7 @@ public class PhotosFragment extends Fragment {
 	private String photoUri;
 	private Bitmap photoBitmap;
 	public String photoFileName = "photo.jpg";
+	boolean reload = true;
 	
 	TumblrClient client;
 	ArrayList<Photo> photos;
@@ -82,7 +83,10 @@ public class PhotosFragment extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		System.out.println("Calling resume");
+		if (reload == true )
 		reloadPhotos();
+		reload = true;
 	}
 
 	@Override
@@ -113,8 +117,8 @@ public class PhotosFragment extends Fragment {
 			}
 			case R.id.action_logout:
 			{
-				TumblrSnapApp.getClient().clearAccessToken();
-		        User.setCurrentUser(null);
+				//TumblrSnapApp.getClient().clearAccessToken();
+		        //User.setCurrentUser(null);
 			}
 			break;
 		}
@@ -125,18 +129,23 @@ public class PhotosFragment extends Fragment {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK) {
 			if (requestCode == TAKE_PHOTO_CODE) {
-     
+				System.out.println("! " + User.currentUser().getBlogHostname());
 				// Call the method below to trigger the cropping
 				cropPhoto(photoFileUri);
+				reload = false;
 			} else if (requestCode == PICK_PHOTO_CODE) {
 				// Extract the photo that was just picked from the gallery
-				
+				System.out.println("!! " + User.currentUser().getBlogHostname());
 				// Call the method below to trigger the cropping
 				cropPhoto(data.getData());
+				reload = false;
 			} else if (requestCode == CROP_PHOTO_CODE) {
+				System.out.println("!!! " + User.currentUser().getBlogHostname());
 				photoBitmap = data.getParcelableExtra("data");
+				reload = false;
 				startPreviewPhotoActivity();
 			} else if (requestCode == POST_PHOTO_CODE) {
+				System.out.println("!!!! " + User.currentUser().getBlogHostname());
 				reloadPhotos();
 			}
 		}

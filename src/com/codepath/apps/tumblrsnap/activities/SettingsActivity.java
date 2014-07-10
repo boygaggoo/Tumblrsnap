@@ -26,7 +26,7 @@ public class SettingsActivity extends Activity {
 
     public void onLogoutButton(View view) {
         TumblrSnapApp.getClient().clearAccessToken();
-        User.setCurrentUser(null);
+        //User.setCurrentUser(null);
 
         finish();
     }

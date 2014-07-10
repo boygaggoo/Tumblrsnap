@@ -24,7 +24,10 @@ public class User {
 
     public static void setCurrentUser(User user) {
         currentUser = user;
-
+        if ( currentUser != null )
+       System.out.println( "current user is " + currentUser.getBlogHostname());
+        else 
+        	System.out.println("current user is null");
         if (user == null) {
             TumblrSnapApp.getSharedPreferences().edit().remove("current_user")
                     .commit();
