@@ -17,3 +17,6 @@ Number of hours = 1 hour + ( 2hours -dealing with Eclipse issues after updating 
 9. [x] Give out the location information( Google Play Services experiment)  after taking a picture.did not find api to post this information
 to Tumblr.
 
+
+Link to Video https://www.dropbox.com/s/m5p5r9wu7juh0iz/tumblrsnap.mp4
+
